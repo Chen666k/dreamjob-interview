@@ -1,0 +1,1459 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>陈梦珂 · 自驱 沟通 迭代 格局</title>
+
+<!--
+══════════════════════════════════════════════════════════════
+  ★★★ 文件使用说明（请先读这里）★★★
+
+  1. 用任何文本编辑器打开本文件就能改（记事本、VS Code、Sublime 都可以）。
+  2. 网页上显示的每一段文字，都可以直接改：
+     找「✏️ 可修改：」注释标记下面的文字，删掉旧内容、输入新内容即可。
+  3. 【】里是对该处文字的提示说明，改完后可以删掉，也可以留着（不会显示在页面上）。
+  4. 文件里以"三角括号加感叹号"开头、以"两个连字符加右三角括号"结尾的内容只是说明文字，不会显示在网页上。
+  5. 颜色、大小、间距等样式在最下面 <style> 区域里，一般不需要动；
+     想改页面主色调，找「修改品牌色」的注释。
+  6. 改完保存，双击本文件即可用浏览器打开预览效果。
+
+  ★ 页面结构（从上到下）：
+     ① 生活照 / 基本信息（最前面）
+     ② 我对影视飓风的品牌理解
+     ③ 影视飓风的数据分析
+     ④ 试播视频
+══════════════════════════════════════════════════════════════
+-->
+
+<style>
+  /* ────────── 样式区（一般不用动）────────── */
+  :root {
+    /* 【修改品牌色】页面主色（红色），想换颜色改这里，例如深蓝 #1a3a6b */
+    --red: #e60012;
+    --red-deep: #b3000e;
+    --bg: #0f1118;
+    --bg-soft: #14161e;
+    --card: #1a1d28;
+    --line: #2c2f3d;
+    --text: #f2f4f8;
+    --muted: #9aa3b2;
+    --red-soft: rgba(230, 0, 18, 0.12);
+    --mono: "SF Mono", "Menlo", "Consolas", monospace;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; overflow-x: hidden; }
+    body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", sans-serif;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    position: relative;
+    overflow-x: hidden;
+    min-height: 100vh;
+  }
+  a { color: inherit; text-decoration: none; }
+
+  /* ---------- 顶部导航条 ---------- */
+  .topbar {
+    position: sticky; top: 0; z-index: 50;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 6vw;
+    background: rgba(11, 13, 18, 0.86);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(38, 44, 58, 0.6);
+    font-size: 14px;
+  }
+  .topbar .brand { font-weight: 700; letter-spacing: 0.5px; }
+  .topbar .brand b { color: var(--red); }
+  .topbar .nav a { color: var(--muted); margin-left: 22px; font-size: 13px; }
+  .topbar .nav a:hover { color: var(--text); }
+
+  /* ---------- 首屏（hero）---------- */
+  .hero {
+    padding: 88px 6vw 60px;
+    max-width: 1180px; margin: 0 auto;
+    position: relative;
+  }
+  /* 背景里的小星星装饰（年轻感点缀，不影响文字） */
+  .hero::before, .hero::after {
+    content: "✦"; position: absolute;
+    color: var(--red); opacity: 0.18;
+    font-size: 30px; touch-action: none; pointer-events: none;
+  }
+  .hero::before { top: 46px; right: 9vw; transform: rotate(12deg); }
+  .hero::after { top: 120px; right: 4vw; font-size: 18px; transform: rotate(-8deg); }
+  .kicker {
+    font-family: var(--mono);
+    font-size: 13px; letter-spacing: 3px;
+    color: var(--red);
+    text-transform: uppercase;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .kicker::before { content: ""; width: 34px; height: 2px; background: var(--red); }
+  .hero h1 {
+    font-size: clamp(30px, 4.6vw, 54px);
+    line-height: 1.22;
+    font-weight: 800;
+    margin: 26px 0 22px;
+    letter-spacing: 0.5px;
+  }
+  .hero h1 em { font-style: normal; color: var(--red); }
+  .hero .sub {
+    font-size: 17px; color: var(--muted);
+    max-width: 780px;
+  }
+  .hero .sub b { color: var(--text); font-weight: 600; }
+  .hero-cta { margin-top: 34px; display: flex; gap: 14px; flex-wrap: wrap; }
+  .btn {
+    display: inline-block; padding: 12px 26px;
+    border-radius: 999px; font-size: 15px; font-weight: 600;
+    transition: transform 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
+  }
+  .btn:hover { transform: translateY(-2px); }
+  .btn-primary { background: var(--red); color: #fff; }
+  .btn-primary:hover { background: #ff1526; box-shadow: 0 8px 22px rgba(230, 0, 18, 0.32); }
+  .btn-ghost { border: 1px solid var(--line); color: var(--text); }
+  .btn-ghost:hover { border-color: var(--red); }
+
+  /* ---------- 顶部数据条 ---------- */
+  .metrics {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px; background: var(--line);
+    border: 1px solid var(--line);
+    border-radius: 14px; overflow: hidden;
+    max-width: 1180px; margin: 0 auto 90px;
+  }
+  .metric {
+    background: var(--bg-soft); padding: 30px 24px;
+  }
+  .metric .num {
+    font-size: clamp(26px, 3vw, 38px); font-weight: 800; color: var(--text);
+    font-family: var(--mono);
+  }
+  .metric .num i { font-style: normal; color: var(--red); }
+  .metric .label { color: var(--muted); font-size: 13px; margin-top: 6px; letter-spacing: 1px; }
+
+  /* ---------- 通用章节 ---------- */
+  section { max-width: 1180px; margin: 0 auto; padding: 0 6vw 96px; }
+  .sec-head { display: flex; align-items: baseline; gap: 18px; margin-bottom: 40px; }
+  .sec-no {
+    font-family: var(--mono); font-size: 15px; color: var(--red);
+    letter-spacing: 1px;
+    background: var(--red-soft);
+    border: 1px solid rgba(230, 0, 18, 0.4);
+    border-radius: 999px;
+    padding: 4px 14px;
+    flex-shrink: 0;
+  }
+  .sec-title { font-size: clamp(24px, 3vw, 34px); font-weight: 800; }
+  .sec-sub { color: var(--muted); font-size: 15px; max-width: 720px; margin-top: 10px; }
+
+  /* ---------- 00 生活照（最前面）---------- */
+  #intro { padding-top: 0; }
+  .intro-grid { display: grid; grid-template-columns: 380px 1fr; gap: 26px; align-items: start; }
+  .photo-slot {
+    border: 2px dashed rgba(230, 0, 18, 0.45);
+    border-radius: 18px;
+    min-height: 440px;
+    display: flex; flex-direction: column; align-items: stretch; justify-content: flex-start;
+    color: var(--muted); padding: 16px 14px;
+    background: var(--bg-soft);
+    position: relative;
+  }
+  /* 照片槽左上角的可爱贴纸 */
+  .photo-slot .sticker {
+    position: absolute; top: 14px; left: 14px;
+    background: var(--red); color: #fff;
+    font-size: 12px; font-weight: 700; letter-spacing: 1px;
+    padding: 4px 12px; border-radius: 999px;
+    transform: rotate(-6deg);
+    box-shadow: 0 6px 16px rgba(230, 0, 18, 0.35);
+  }
+  /* ═══════ 3D 浮起画廊 · 生活照 ═══════ */
+  .photo-wall {
+    width: 100%;
+    margin-top: 48px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    perspective: 1200px;
+    perspective-origin: center center;
+  }
+  .photo-wall.collapsed {
+    display: none;
+  }
+  /* 展开时交错滑入动画 */
+  .photo-wall:not(.collapsed) .photo-item {
+    opacity: 0;
+    transform: translateY(40px) rotateX(15deg) scale(0.85);
+    animation: photoFloatIn 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+  .photo-wall:not(.collapsed) .photo-item:nth-child(1) { animation-delay: 0.05s; }
+  .photo-wall:not(.collapsed) .photo-item:nth-child(2) { animation-delay: 0.15s; }
+  .photo-wall:not(.collapsed) .photo-item:nth-child(3) { animation-delay: 0.25s; }
+  .photo-wall:not(.collapsed) .photo-item:nth-child(4) { animation-delay: 0.35s; }
+  .photo-wall:not(.collapsed) .photo-item:nth-child(5) { animation-delay: 0.45s; }
+  .photo-wall:not(.collapsed) .photo-item:nth-child(6) { animation-delay: 0.55s; }
+  @keyframes photoFloatIn {
+    to {
+      opacity: 1;
+      transform: translateY(0) rotateX(0deg) scale(1);
+    }
+  }
+  .photo-item {
+    position: relative;
+    border-radius: 14px;
+    cursor: pointer;
+    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+                box-shadow 0.35s ease;
+    transform-style: preserve-3d;
+    will-change: transform;
+  }
+  .photo-item:nth-child(even) {
+    transform: translateY(18px);
+  }
+  .photo-item:hover {
+    transform: translateY(-8px) scale(1.03) !important;
+    box-shadow: 0 20px 50px rgba(230, 0, 18, 0.25),
+                0 0 0 2px rgba(230, 0, 18, 0.15);
+    z-index: 10;
+  }
+  .photo-item img {
+    width: 100%;
+    aspect-ratio: 9 / 16;
+    object-fit: cover;
+    border-radius: 14px;
+    display: block;
+    transition: filter 0.3s ease;
+  }
+  .photo-item:hover img {
+    filter: brightness(1.08) contrast(1.05);
+  }
+  /* 序号角标 */
+  .photo-item .photo-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(230, 0, 18, 0.9);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 800;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(230, 0, 18, 0.4);
+    opacity: 0;
+    transform: scale(0.5);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+  .photo-item:hover .photo-badge {
+    opacity: 1;
+    transform: scale(1);
+  }
+  /* 底部光影条 */
+  .photo-item::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 5%;
+    right: 5%;
+    height: 40px;
+    background: linear-gradient(to top, rgba(0,0,0,0.4), transparent);
+    border-radius: 0 0 14px 14px;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  .photo-item:hover::after {
+    opacity: 1;
+  }
+  /* 折叠按钮 */
+  .photo-toggle {
+    position: absolute;
+    bottom: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--red);
+    color: #fff;
+    border: none;
+    border-radius: 999px;
+    padding: 8px 18px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    letter-spacing: 1px;
+    box-shadow: 0 8px 24px rgba(230, 0, 18, 0.35);
+    transition: transform .2s ease, box-shadow .2s ease;
+    z-index: 2;
+  }
+  .photo-toggle:hover { transform: translateX(-50%) scale(1.05); box-shadow: 0 10px 28px rgba(230, 0, 18, 0.45); }
+  .photo-hint {
+    font-size: 13px;
+    color: var(--muted);
+    margin-top: 72px;
+    text-align: center;
+  }
+  .photo-hint .small-emojis {
+    font-size: 20px;
+    display: block;
+    margin-bottom: 6px;
+  }
+  .photo-wall:not(.collapsed) ~ .photo-hint { display: none; }
+  /* ═══════ 照片点击放大 lightbox ═══════ */
+  .lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: rgba(0, 0, 0, 0.88);
+    backdrop-filter: blur(12px);
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    animation: lbFadeIn 0.25s ease;
+  }
+  .lightbox.active { display: flex; }
+  @keyframes lbFadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+  .lightbox-img {
+    max-width: 88vw;
+    max-height: 82vh;
+    object-fit: contain;
+    border-radius: 16px;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+    animation: lbZoomIn 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  @keyframes lbZoomIn {
+    from { transform: scale(0.85); opacity: 0; }
+    to   { transform: scale(1);   opacity: 1; }
+  }
+  .lightbox-close {
+    position: absolute;
+    top: 24px;
+    right: 32px;
+    background: rgba(230, 0, 18, 0.9);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    font-size: 22px;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 24px rgba(230, 0, 18, 0.4);
+    transition: transform 0.2s ease, background 0.2s ease;
+    z-index: 10000;
+  }
+  .lightbox-close:hover { transform: scale(1.1); background: var(--red); }
+  .lightbox-caption {
+    color: rgba(255,255,255,0.7);
+    font-size: 14px;
+    margin-top: 18px;
+    letter-spacing: 1px;
+  }
+  .lb-nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(230,0,18,0.85);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    font-size: 20px;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 6px 20px rgba(230,0,18,0.4);
+    transition: transform 0.2s ease, background 0.2s ease;
+    z-index: 10000;
+    opacity: 0.7;
+  }
+  .lb-nav-btn:hover { transform: translateY(-50%) scale(1.15); background: var(--red); opacity: 1; }
+  .lb-nav-btn.prev { left: 24px; }
+  .lb-nav-btn.next { right: 24px; }
+  @media (max-width: 560px) {
+    .lb-nav-btn { width: 40px; height: 40px; font-size: 16px; }
+    .lb-nav-btn.prev { left: 10px; }
+    .lb-nav-btn.next { right: 10px; }
+  }
+  .intro-info { display: flex; flex-direction: column; gap: 18px; }
+  .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .info-cell { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 20px 22px; transition: border-color 0.2s ease; }
+  .info-cell:hover { border-color: rgba(230, 0, 18, 0.45); }
+  .info-cell .k { color: var(--muted); font-size: 12.5px; letter-spacing: 1px; margin-bottom: 6px; }
+  .info-cell .v { font-size: 16.5px; font-weight: 700; }
+  .info-cell .v.contact { font-family: var(--mono); font-size: 15px; font-weight: 500; }
+  .intro-quote {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 20px 24px; font-size: 15px; color: var(--muted);
+    border-left: 3px solid var(--red);
+  }
+  .intro-quote b { color: var(--text); }
+
+  /* ---------- 01 品牌理解：三张卡片 ---------- */
+  .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .card {
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 16px; padding: 28px 26px;
+    transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .card:hover { border-color: rgba(230, 0, 18, 0.55); transform: translateY(-4px); box-shadow: 0 10px 26px rgba(0, 0, 0, 0.35); }
+  .card .tag {
+    font-family: var(--mono); font-size: 12px; letter-spacing: 2px;
+    color: var(--red); margin-bottom: 16px;
+  }
+  .card h3 { font-size: 19px; font-weight: 700; margin-bottom: 12px; }
+  .card p { color: var(--muted); font-size: 14.5px; }
+  .card p + p { margin-top: 10px; }
+  .card .hl { color: var(--text); font-weight: 600; }
+
+  /* ---------- 02 数据分析 ---------- */
+  .data-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .data-card {
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 16px; padding: 26px 24px;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+  }
+  .data-card:hover { transform: translateY(-3px); border-color: rgba(230, 0, 18, 0.5); }
+  .data-card .d-num {
+    font-size: clamp(28px, 3.2vw, 40px); font-weight: 800;
+    font-family: var(--mono); color: var(--text);
+  }
+  .data-card .d-num i { font-style: normal; color: var(--red); }
+  .data-card .d-label { color: var(--text); font-weight: 600; font-size: 14.5px; margin-top: 8px; }
+  .data-card .d-src { color: var(--muted); font-size: 12px; margin-top: 6px; line-height: 1.65; }
+  .data-card .d-src b { color: var(--red); font-weight: 600; }
+  .takeaway {
+    margin-top: 22px;
+    background: var(--red-soft);
+    border: 1px solid rgba(230, 0, 18, 0.35);
+    border-radius: 16px; padding: 22px 26px;
+  }
+  .takeaway .t-title { color: var(--red); font-weight: 800; font-size: 15px; letter-spacing: 1px; margin-bottom: 12px; }
+  .takeaway ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .takeaway li { color: var(--muted); font-size: 14.5px; padding-left: 22px; position: relative; }
+  .takeaway li::before { content: "✦"; position: absolute; left: 0; color: var(--red); }
+  .takeaway li b { color: var(--text); }
+
+  /* ---------- 数据图表区 ---------- */
+  .chart-wrap { margin: 28px 0 16px; }
+  .chart-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  .chart-box {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 12px 14px 14px;
+    transition: border-color 0.2s ease;
+  }
+  .chart-box:hover { border-color: rgba(230, 0, 18, 0.4); }
+  .chart-box img { border-radius: 10px; }
+  .chart-caption {
+    color: var(--muted);
+    font-size: 12px;
+    margin-top: 10px;
+    line-height: 1.6;
+  }
+  @media (max-width: 768px) {
+    .chart-row { grid-template-columns: 1fr; gap: 14px; }
+    .chart-box { padding: 10px 12px 12px; }
+  }
+
+  /* ---------- 03 岗位契合：职责对照 + 价值 ---------- */
+  .jd-list { display: flex; flex-direction: column; gap: 14px; }
+  .jd-row {
+    display: grid; grid-template-columns: 1fr 1.2fr; gap: 26px;
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 14px; padding: 24px 26px;
+    align-items: start;
+  }
+  .jd-row .req { font-size: 15.5px; font-weight: 700; color: var(--text); }
+  .jd-row .req .n {
+    font-family: var(--mono); color: var(--red); font-weight: 800; margin-right: 8px; font-size: 13px;
+  }
+  .jd-row .evi { color: var(--muted); font-size: 14px; }
+  .jd-row .evi b { color: var(--text); font-weight: 600; }
+
+  .block-title {
+    font-family: var(--mono); font-size: 13px; letter-spacing: 2px;
+    color: var(--red); margin: 46px 0 18px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .block-title::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+
+  .value-list { display: flex; flex-direction: column; gap: 14px; }
+  .value-row {
+    display: grid; grid-template-columns: 240px 1fr; gap: 20px; align-items: start;
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 22px 26px;
+    transition: border-color 0.2s ease;
+  }
+  .value-row:hover { border-color: rgba(230, 0, 18, 0.45); }
+  .value-row .v-title { font-weight: 700; font-size: 16px; color: var(--text); }
+  .value-row .v-title i {
+    font-style: normal; color: var(--red); margin-right: 8px;
+    font-family: var(--mono); font-size: 14px;
+  }
+  .value-row .v-desc { color: var(--muted); font-size: 14.5px; }
+  .value-row .v-desc b { color: var(--text); }
+
+  /* ---------- 04 试播视频占位区 ---------- */
+  .video-slot {
+    border: 2px dashed rgba(230, 0, 18, 0.45); border-radius: 18px;
+    padding: 44px 30px; text-align: center;
+    background: var(--bg-soft); position: relative; overflow: hidden;
+  }
+  .video-slot::before {
+    content: "▶"; position: absolute; left: 50%; top: 44px; transform: translateX(-50%);
+    font-size: 34px; color: var(--red);
+  }
+  .video-slot h3 { margin-top: 58px; font-size: 19px; font-weight: 700; }
+  .video-slot p { color: var(--muted); font-size: 14px; margin-top: 8px; max-width: 560px; margin-left: auto; margin-right: auto; }
+  .video-slot .tip {
+    display: inline-block; margin-top: 18px; padding: 8px 16px;
+    border: 1px solid var(--red); color: var(--red); border-radius: 999px;
+    font-size: 13px;
+  }
+  .video-points { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 26px; text-align: left; }
+  .video-points .p { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; }
+  .video-points .p b { display: block; font-size: 14.5px; margin-bottom: 4px; }
+  .video-points .p span { color: var(--muted); font-size: 13px; }
+
+  /* ---------- 页脚 ---------- */
+  footer {
+    border-top: 1px solid var(--line);
+    padding: 40px 6vw 50px; text-align: center;
+  }
+  footer .slogan {
+    font-size: 20px; font-weight: 800; letter-spacing: 4px;
+  }
+  footer .slogan em { font-style: normal; color: var(--red); }
+  footer .meta { color: var(--muted); font-size: 13.5px; margin-top: 14px; }
+  footer .contact-line { margin-top: 18px; font-family: var(--mono); font-size: 14px; color: var(--text); display: flex; gap: 28px; justify-content: center; flex-wrap: wrap; }
+  footer .note { color: #5d6675; font-size: 12px; margin-top: 22px; }
+
+  /* ---------- 自白区域 ---------- */
+  .intro-statement {
+    margin-top: 28px;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 28px 32px;
+  }
+  .intro-statement p {
+    color: var(--muted);
+    font-size: 15px;
+    line-height: 1.8;
+    margin-bottom: 12px;
+  }
+  .intro-statement p:last-child { margin-bottom: 0; }
+  .intro-statement b {
+    color: var(--text);
+    font-weight: 600;
+  }
+  .intro-statement .tag {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--red);
+    letter-spacing: 1px;
+    margin-bottom: 14px;
+  }
+
+  /* ---------- 背景装饰层 ---------- */
+  body {
+    position: relative;
+    overflow-x: hidden;
+    min-height: 100vh;
+  }
+  /* 非常微弱的网格纹理背景 */
+  .bg-mesh {
+    position: fixed; inset: 0; z-index: 0; pointer-events: none;
+    background-image:
+      linear-gradient(rgba(230,0,18,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(230,0,18,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
+    -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
+  }
+  /* 浮动光球 */
+  .orb {
+    position: fixed; border-radius: 50%;
+    filter: blur(80px); pointer-events: none; z-index: 0;
+    animation: orbDrift 20s ease-in-out infinite alternate;
+  }
+  .orb-1 {
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(230,0,18,0.18) 0%, transparent 70%);
+    top: -100px; right: -80px;
+    animation-duration: 25s;
+  }
+  .orb-2 {
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, rgba(230,0,18,0.12) 0%, transparent 70%);
+    bottom: 15%; left: -100px;
+    animation-duration: 30s;
+    animation-delay: -5s;
+  }
+  .orb-3 {
+    width: 250px; height: 250px;
+    background: radial-gradient(circle, rgba(255,80,80,0.10) 0%, transparent 70%);
+    top: 45%; right: 5%;
+    animation-duration: 22s;
+    animation-delay: -10s;
+  }
+  @keyframes orbDrift {
+    0% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(-30px, 20px) scale(1.08); }
+    100% { transform: translate(20px, -15px) scale(0.95); }
+  }
+  /* 顶部和底部渐变光带 */
+  .glow-bar {
+    position: fixed; left: 0; right: 0; height: 1px; pointer-events: none; z-index: 1;
+    background: linear-gradient(90deg, transparent 0%, rgba(230,0,18,0.3) 20%, rgba(230,0,18,0.5) 50%, rgba(230,0,18,0.3) 80%, transparent 100%);
+  }
+  .glow-bar.top { top: 0; }
+  .glow-bar.bottom { bottom: 0; }
+  /* 细红线装饰 */
+  .red-line {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(230,0,18,0.4), transparent);
+    margin: 0 auto;
+    max-width: 300px;
+  }
+  /* 卡片微妙发光 */
+  .card {
+    position: relative; z-index: 1;
+    box-shadow: 0 0 0 1px var(--line), 0 4px 24px rgba(0,0,0,0.3);
+  }
+  .card::before {
+    content: ""; position: absolute; inset: -1px; border-radius: 17px;
+    background: linear-gradient(135deg, rgba(230,0,18,0.06) 0%, transparent 50%, rgba(230,0,18,0.04) 100%);
+    z-index: -1; pointer-events: none;
+  }
+  /* 数据条微光 */
+  .metric {
+    position: relative; z-index: 1;
+  }
+  .metric::after {
+    content: ""; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+    width: 60%; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(230,0,18,0.25), transparent);
+    pointer-events: none;
+  }
+  /* section 顶部微光 */
+  section {
+    position: relative; z-index: 1;
+  }
+  section::before {
+    content: ""; position: absolute; top: -20px; left: 10%; right: 10%; height: 60px;
+    background: radial-gradient(ellipse at center, rgba(230,0,18,0.04) 0%, transparent 70%);
+    pointer-events: none; z-index: -1;
+  }
+
+  /* ---------- 可爱图标动画 ---------- */
+  .float-star { animation: float 3s ease-in-out infinite; display: inline-block; }
+  .sparkle { animation: sparkle 2s ease-in-out infinite; display: inline-block; }
+  .wiggle { animation: wiggle 2.5s ease-in-out infinite; display: inline-block; }
+  .pulse-emoji { animation: pulseEmoji 2s ease-in-out infinite; display: inline-block; }
+  .bounce-soft { animation: bounceSoft 2s ease-in-out infinite; display: inline-block; }
+  @keyframes float {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-8px) rotate(5deg); }
+  }
+  @keyframes sparkle {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.6; transform: scale(0.85) rotate(-10deg); }
+  }
+  @keyframes wiggle {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(-6deg); }
+    75% { transform: rotate(6deg); }
+  }
+  @keyframes pulseEmoji {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.15); }
+  }
+  @keyframes bounceSoft {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-4px); }
+  }
+  /* 小装饰物 */
+  .deco-blob {
+    position: absolute; border-radius: 50%;
+    background: radial-gradient(circle, rgba(230,0,18,0.18) 0%, transparent 70%);
+    pointer-events: none; z-index: 0;
+  }
+  .cute-tag {
+    display: inline-flex; align-items: center; gap: 4px;
+    background: var(--red-soft); border: 1px solid rgba(230,0,18,0.35);
+    border-radius: 999px; padding: 3px 10px; font-size: 12px;
+    color: var(--red); font-family: var(--mono); letter-spacing: 1px;
+  }
+
+  /* 更多浮动光球 */
+  .orb-4 {
+    width: 320px; height: 320px;
+    background: radial-gradient(circle, rgba(230,0,18,0.14) 0%, transparent 70%);
+    top: 65%; right: -60px;
+    animation-duration: 28s; animation-delay: -15s;
+  }
+  .orb-5 {
+    width: 200px; height: 200px;
+    background: radial-gradient(circle, rgba(255,100,100,0.12) 0%, transparent 70%);
+    top: 25%; left: 8%;
+    animation-duration: 35s; animation-delay: -8s;
+  }
+  /* 红色装饰圆环 - 静态 */
+  .red-ring {
+    position: fixed; pointer-events: none; z-index: 0;
+    border: 1px solid rgba(230,0,18,0.12);
+    border-radius: 50%;
+  }
+  .red-ring-1 { width: 500px; height: 500px; top: -150px; right: -100px; }
+  .red-ring-2 { width: 300px; height: 300px; bottom: 10%; left: -80px; }
+  .red-ring-3 { width: 200px; height: 200px; top: 40%; right: 15%; border-color: rgba(230,0,18,0.08); }
+  /* 红色渐变块 */
+  .red-block {
+    position: fixed; pointer-events: none; z-index: 0;
+    background: linear-gradient(135deg, rgba(230,0,18,0.06) 0%, transparent 60%);
+    border-radius: 30px;
+  }
+  .red-block-1 { width: 400px; height: 300px; top: 5%; left: -100px; transform: rotate(-15deg); }
+  .red-block-2 { width: 350px; height: 250px; bottom: 20%; right: -80px; transform: rotate(10deg); }
+  /* 红色角标装饰 */
+  .corner-accent {
+    position: fixed; pointer-events: none; z-index: 0;
+    width: 60px; height: 60px;
+    border-right: 2px solid rgba(230,0,18,0.2);
+    border-top: 2px solid rgba(230,0,18,0.2);
+    border-radius: 0 12px 0 0;
+  }
+  .corner-accent-1 { top: 80px; right: 30px; }
+  .corner-accent-2 { bottom: 100px; left: 30px; transform: rotate(180deg); }
+  /* 红色细线装饰 */
+  .red-accent-line {
+    position: fixed; pointer-events: none; z-index: 0;
+    background: linear-gradient(90deg, transparent, rgba(230,0,18,0.15), transparent);
+    height: 1px;
+  }
+  .accent-line-1 { width: 200px; top: 30%; left: 5%; transform: rotate(25deg); }
+  .accent-line-2 { width: 150px; top: 70%; right: 8%; transform: rotate(-20deg); }
+  .accent-line-3 { width: 100px; top: 50%; left: 20%; transform: rotate(45deg); }
+
+  /* 浮动小粒子 */
+  .particles {
+    position: fixed; inset: 0; pointer-events: none; z-index: 0;
+  }
+  .particle {
+    position: absolute; border-radius: 50%;
+    background: rgba(230,0,18,0.25);
+    animation: particleFloat linear infinite;
+  }
+  .particle:nth-child(1) { width: 3px; height: 3px; left: 10%; top: 80%; animation-duration: 18s; animation-delay: 0s; }
+  .particle:nth-child(2) { width: 2px; height: 2px; left: 25%; top: 90%; animation-duration: 22s; animation-delay: -5s; }
+  .particle:nth-child(3) { width: 4px; height: 4px; left: 50%; top: 85%; animation-duration: 16s; animation-delay: -8s; opacity: 0.6; }
+  .particle:nth-child(4) { width: 2px; height: 2px; left: 70%; top: 75%; animation-duration: 20s; animation-delay: -12s; }
+  .particle:nth-child(5) { width: 3px; height: 3px; left: 85%; top: 88%; animation-duration: 24s; animation-delay: -3s; }
+  .particle:nth-child(6) { width: 2px; height: 2px; left: 15%; top: 50%; animation-duration: 19s; animation-delay: -10s; }
+  .particle:nth-child(7) { width: 3px; height: 3px; left: 60%; top: 30%; animation-duration: 21s; animation-delay: -6s; opacity: 0.4; }
+  .particle:nth-child(8) { width: 2px; height: 2px; left: 80%; top: 45%; animation-duration: 17s; animation-delay: -14s; }
+  @keyframes particleFloat {
+    0% { transform: translateY(0) translateX(0); opacity: 0; }
+    10% { opacity: 0.6; }
+    90% { opacity: 0.6; }
+    100% { transform: translateY(-120vh) translateX(40px); opacity: 0; }
+  }
+  /* 角落几何装饰 */
+  .geo-deco {
+    position: fixed; pointer-events: none; z-index: 0;
+    border: 1px solid rgba(230,0,18,0.08);
+    animation: geoSpin 40s linear infinite;
+  }
+  .geo-1 {
+    width: 120px; height: 120px; top: 12%; left: 3%;
+    transform: rotate(15deg); border-radius: 20px;
+  }
+  .geo-2 {
+    width: 80px; height: 80px; bottom: 20%; right: 5%;
+    transform: rotate(-10deg); border-radius: 12px;
+    animation-direction: reverse; animation-duration: 30s;
+  }
+  .geo-3 {
+    width: 60px; height: 60px; top: 55%; left: 8%;
+    transform: rotate(45deg); border-radius: 8px;
+    animation-duration: 50s;
+    border-color: rgba(230,0,18,0.05);
+  }
+  @keyframes geoSpin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  /* 底部微光波浪 */
+  .wave-glow {
+    position: fixed; bottom: 0; left: 0; right: 0; height: 200px;
+    pointer-events: none; z-index: 0;
+    background: linear-gradient(to top, rgba(230,0,18,0.04) 0%, transparent 100%);
+    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23000' d='M0,192L48,197.3C96,203,192,213,288,229.3C384,245,480,267,576,250.7C672,235,768,181,864,181.3C960,181,1056,235,1152,234.7C1248,235,1344,181,1392,154.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'/%3E%3C/svg%3E");
+    mask-size: 1440px 200px;
+    mask-repeat: repeat-x;
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23000' d='M0,192L48,197.3C96,203,192,213,288,229.3C384,245,480,267,576,250.7C672,235,768,181,864,181.3C960,181,1056,235,1152,234.7C1248,235,1344,181,1392,154.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'/%3E%3C/svg%3E");
+    -webkit-mask-size: 1440px 200px;
+    -webkit-mask-repeat: repeat-x;
+    animation: waveMove 15s linear infinite;
+  }
+  @keyframes waveMove {
+    0% { mask-position: 0 0; -webkit-mask-position: 0 0; }
+    100% { mask-position: -1440px 0; -webkit-mask-position: -1440px 0; }
+  }
+
+  /* ---------- 个人优势标签卡片 ---------- */
+  .strength-tags {
+    display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px;
+  }
+  .strength-tag {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(230,0,18,0.08);
+    border: 1px solid rgba(230,0,18,0.25);
+    border-radius: 999px;
+    padding: 7px 16px; font-size: 13.5px;
+    color: var(--text); font-weight: 500;
+    transition: all 0.2s ease;
+  }
+  .strength-tag:hover {
+    background: rgba(230,0,18,0.15);
+    border-color: rgba(230,0,18,0.45);
+    transform: translateY(-2px);
+  }
+  .strength-tag .tag-icon { font-size: 15px; }
+
+  /* ---------- 工作经历时间线 ---------- */
+  .timeline {
+    position: relative; margin-top: 28px;
+    padding-left: 24px;
+  }
+  .timeline::before {
+    content: ""; position: absolute; left: 0; top: 8px; bottom: 8px;
+    width: 2px; background: linear-gradient(to bottom, var(--red), rgba(230,0,18,0.2));
+    border-radius: 2px;
+  }
+  .timeline-item {
+    position: relative; padding-bottom: 24px;
+  }
+  .timeline-item:last-child { padding-bottom: 0; }
+  .timeline-item::before {
+    content: ""; position: absolute; left: -28px; top: 6px;
+    width: 10px; height: 10px; border-radius: 50%;
+    background: var(--red); border: 2px solid var(--bg);
+    box-shadow: 0 0 0 2px var(--red);
+  }
+  .timeline-header {
+    display: flex; justify-content: space-between; align-items: baseline;
+    margin-bottom: 6px; flex-wrap: wrap; gap: 4px;
+  }
+  .timeline-title { font-size: 15px; font-weight: 700; color: var(--text); }
+  .timeline-company { font-size: 13px; color: var(--muted); }
+  .timeline-date {
+    font-family: var(--mono); font-size: 12px; color: var(--red);
+    letter-spacing: 0.5px;
+  }
+  .timeline-desc {
+    font-size: 13.5px; color: var(--muted); line-height: 1.7;
+  }
+  .timeline-desc b { color: var(--text); font-weight: 600; }
+  .timeline-highlight {
+    display: inline-block; margin-top: 6px;
+    background: var(--red-soft); border: 1px solid rgba(230,0,18,0.3);
+    border-radius: 6px; padding: 3px 10px;
+    font-size: 12px; color: var(--red); font-family: var(--mono);
+  }
+
+  /* ---------- 手机端适配 ---------- */
+  @media (max-width: 900px) {
+    .metrics { grid-template-columns: repeat(2, 1fr); }
+    .grid3, .data-grid { grid-template-columns: 1fr; }
+    .jd-row, .value-row { grid-template-columns: 1fr; gap: 10px; }
+    .intro-grid { grid-template-columns: 1fr; }
+    .photo-slot { min-height: 320px; }
+    .video-points { grid-template-columns: 1fr; }
+    .topbar .nav { display: none; }
+    .hero { padding-top: 64px; }
+    .resume-notice { font-size: 13px; padding: 8px 14px; }
+    .resume-notice svg { width: 16px; height: 16px; }
+  }
+
+  /* ═══════ 简历按钮 · 超强调版 ═══════ */
+  .resume-btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: linear-gradient(135deg, var(--red), #ff4757);
+    color: #fff; border: none; border-radius: 10px;
+    padding: 9px 18px; font-size: 14px; font-weight: 800;
+    cursor: pointer; letter-spacing: 0.8px;
+    box-shadow: 0 4px 16px rgba(230, 0, 18, 0.45),
+                0 0 30px rgba(230, 0, 18, 0.15);
+    transition: all 0.25s ease;
+    text-decoration: none; position: relative; overflow: hidden;
+    animation: resumeGlow 2.5s ease-in-out infinite;
+  }
+  .resume-btn::after {
+    content: '';
+    position: absolute; top: -50%; left: -50%;
+    width: 200%; height: 200%;
+    background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.15) 50%, transparent 70%);
+    animation: resumeShine 3s ease-in-out infinite;
+  }
+  @keyframes resumeGlow {
+    0%, 100% { box-shadow: 0 4px 16px rgba(230,0,18,0.45), 0 0 30px rgba(230,0,18,0.15); }
+    50% { box-shadow: 0 6px 24px rgba(230,0,18,0.6), 0 0 50px rgba(230,0,18,0.25); }
+  }
+  @keyframes resumeShine {
+    0% { transform: translateX(-100%) rotate(45deg); }
+    100% { transform: translateX(100%) rotate(45deg); }
+  }
+  .resume-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 8px 28px rgba(230, 0, 18, 0.55), 0 0 60px rgba(230, 0, 18, 0.3);
+    animation: none;
+  }
+  .resume-btn svg { width: 18px; height: 18px; fill: currentColor; position: relative; z-index: 1; }
+  .resume-btn span { position: relative; z-index: 1; }
+
+  /* ═══════ 简历提示横幅 ═══════ */
+  .resume-notice {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: linear-gradient(90deg, rgba(230,0,18,0.15), rgba(230,0,18,0.05));
+    border: 1px solid rgba(230, 0, 18, 0.35);
+    border-radius: 12px;
+    padding: 10px 18px;
+    font-size: 14px;
+    color: var(--text);
+    margin-bottom: 20px;
+    animation: noticePulse 3s ease-in-out infinite;
+  }
+  .resume-notice svg { width: 20px; height: 20px; fill: var(--red); flex-shrink: 0; }
+  .resume-notice b { color: var(--red); font-weight: 700; }
+  @keyframes noticePulse {
+    0%, 100% { border-color: rgba(230,0,18,0.35); box-shadow: 0 0 0 rgba(230,0,18,0); }
+    50% { border-color: rgba(230,0,18,0.6); box-shadow: 0 0 20px rgba(230,0,18,0.15); }
+  }
+
+  /* ═══════ 03 试播视频板块 ═══════ */
+  .video-cta {
+    max-width: 680px;
+    margin: 0 auto;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 34px 38px;
+    text-align: center;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  .video-cta::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--red), #ff6b35, var(--red));
+    opacity: 0.8;
+  }
+  .video-cta:hover {
+    border-color: rgba(230,0,18,0.45);
+    box-shadow: 0 12px 40px rgba(230,0,18,0.12);
+  }
+  .video-cta .v-icon {
+    width: 64px; height: 64px;
+    background: var(--red-soft);
+    border: 2px solid rgba(230,0,18,0.3);
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    margin-bottom: 18px;
+    animation: vBounce 2.5s ease-in-out infinite;
+  }
+  @keyframes vBounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+  }
+  .video-cta .v-title {
+    font-size: clamp(18px, 2.4vw, 24px);
+    font-weight: 800;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+  .video-cta .v-desc {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.7;
+    margin-bottom: 24px;
+    max-width: 480px;
+    margin-left: auto; margin-right: auto;
+  }
+  .video-cta .v-desc b { color: var(--red); font-weight: 600; }
+  .video-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(135deg, var(--red), var(--red-deep));
+    color: #fff;
+    font-weight: 700;
+    font-size: 15px;
+    padding: 14px 32px;
+    border-radius: 999px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    box-shadow: 0 8px 24px rgba(230,0,18,0.3);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .video-btn:hover {
+    transform: translateY(-2px) scale(1.04);
+    box-shadow: 0 12px 32px rgba(230,0,18,0.45);
+  }
+  .video-btn svg { width: 20px; height: 20px; fill: #fff; flex-shrink: 0; }
+  .video-meta {
+    margin-top: 18px;
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--muted);
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .video-meta span {
+    background: var(--bg-soft);
+    border: 1px solid var(--line);
+    padding: 5px 12px;
+    border-radius: 6px;
+  }
+</style>
+</head>
+<body>
+
+<!-- ════════════════════════ 背景装饰层 ════════════════════════
+  这些元素只负责视觉氛围，不影响任何内容和点击
+-->
+<div class="bg-mesh"></div>
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+<div class="orb orb-3"></div>
+<div class="orb orb-4"></div>
+<div class="orb orb-5"></div>
+<div class="glow-bar top"></div>
+<div class="glow-bar bottom"></div>
+<div class="particles">
+  <div class="particle"></div>
+  <div class="particle"></div>
+  <div class="particle"></div>
+  <div class="particle"></div>
+  <div class="particle"></div>
+  <div class="particle"></div>
+  <div class="particle"></div>
+  <div class="particle"></div>
+</div>
+<div class="geo-deco geo-1"></div>
+<div class="geo-deco geo-2"></div>
+<div class="geo-deco geo-3"></div>
+<div class="wave-glow"></div>
+<div class="red-ring red-ring-1"></div>
+<div class="red-ring red-ring-2"></div>
+<div class="red-ring red-ring-3"></div>
+<div class="red-block red-block-1"></div>
+<div class="red-block red-block-2"></div>
+<div class="corner-accent corner-accent-1"></div>
+<div class="corner-accent corner-accent-2"></div>
+<div class="red-accent-line accent-line-1"></div>
+<div class="red-accent-line accent-line-2"></div>
+<div class="red-accent-line accent-line-3"></div>
+
+<!-- ════════════════════════ 顶部导航条 ════════════════════════
+  ✏️ 可修改：左侧名字 + 右侧导航栏目文字
+-->
+<header class="topbar">
+  <div class="brand">🌟 陈梦珂 <b>·</b> 电商主播</div>
+  <nav class="nav">
+    <a href="#intro">👤 先认识我</a>
+    <a href="#brand">💡 品牌理解</a>
+      <a href="#data">📊 数据分析</a>
+      <a href="#video">🎬 试播视频</a>
+      <a class="resume-btn" href="陈梦珂个人简历.pdf" target="_blank" title="打开个人简历">
+        <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm-1 2l5 5h-5V4zM8 12h8v2H8v-2zm0 4h8v2H8v-2z"/></svg>
+        简历
+      </a>
+  </nav>
+</header>
+
+<!-- ════════════════════════ 简历快捷入口 ════════════════════════ -->
+<div style="text-align:center; padding-top: 70px; padding-bottom: 0;">
+  <a class="resume-notice" href="陈梦珂个人简历.pdf" target="_blank" title="打开个人简历">
+    <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm-1 2l5 5h-5V4zM8 12h8v2H8v-2zm0 4h8v2H8v-2z"/></svg>
+    <span>👆 <b>如果你想直接看简历，请点这里</b> → 打开 PDF</span>
+  </a>
+</div>
+
+<!-- ════════════════════════ 首屏（最重要的一块）════════════════════════
+  ✏️ 可修改：小标签 / 大标题 / 两段介绍 / 两个按钮文字
+-->
+<div class="hero">
+  <div class="kicker">求职自述 <span class="sparkle">✦</span> 目标岗位 电商主播</div>
+
+  <!-- ✏️ 可修改：大标题（改动最大的"标题"） -->
+  <h1><span class="bounce-soft">🎯</span> 自驱 沟通 迭代 格局</h1>
+
+  <!-- ✏️ 可修改：第一段介绍 -->
+  <p class="sub">
+    我有 <b>4 年官旗与达人号直播带货经验</b>，品类覆盖女装、鞋靴箱包、家纺等；
+    做过自然流憋单，也做过付费平播，<b>两种节奏都完整经历过</b>。
+  </p>
+
+  <!-- ✏️ 可修改：第二段介绍（已单独成行） -->
+  <p class="sub">
+    我理解影视飓风的直播间是<b>IP 向达播逻辑</b>——用户买单的是 IP 认同，不是刻板话术。我能带来的，是内容型主播的专业度与活人感。
+  </p>
+
+  <!-- ✏️ 可修改：两个按钮文字；href="#brand" 表示点击后跳到对应栏目，一般不用改 -->
+  <div class="hero-cta">
+    <a class="btn btn-primary" href="#brand">为什么是影视飓风</a>
+    <a class="btn btn-ghost" href="#video">先看试播视频</a>
+  </div>
+</div>
+
+<!-- ════════════════════════ 顶部数据条 ════════════════════════
+  ✏️ 可修改：4 个数字和说明文字（每块 = 数字 + 说明）
+-->
+<div class="metrics">
+  <div class="metric"><div class="num"><span class="wiggle">⭐</span> 4<i>年</i></div><div class="label">官旗 + 达人号直播带货</div></div>
+  <div class="metric"><div class="num"><span class="pulse-emoji">👗</span> 女装</div><div class="label">鞋靴箱包 · 家纺全品类</div></div>
+  <div class="metric"><div class="num"><span class="sparkle">🔥</span> 大场</div><div class="label">+ 日常平播双节奏</div></div>
+  <div class="metric"><div class="num"><span class="float-star">💫</span> IP</div><div class="label">内容型直播经验</div></div>
+</div>
+
+<!-- ════════════════════════ 00 生活照 · 基本信息（放在最前面）════════════════════════
+  ✏️ 可修改：生活照在下方 .photo-wall 中（photos 目录）；信息格内容都可以直接改
+-->
+<section id="intro">
+  <div class="sec-head">
+    <span class="sec-no">00</span>
+    <div>
+      <div class="sec-title">先认识我 <span class="sparkle">✦</span> 我是陈梦珂</div>
+
+    </div>
+  </div>
+
+  <div class="intro-grid">
+    <div class="photo-slot">
+      <span class="sticker">生活照 ✦</span>
+      <div class="photo-wall collapsed" id="photoWall">
+        <div class="photo-item" onclick="openLightbox('photos/IMG_4439.png')"><img src="photos/IMG_4439.png" alt="生活照 1"><span class="photo-badge">01</span></div>
+        <div class="photo-item" onclick="openLightbox('photos/IMG_4435.jpeg')"><img src="photos/IMG_4435.jpeg" alt="生活照 2"><span class="photo-badge">02</span></div>
+        <div class="photo-item" onclick="openLightbox('photos/IMG_4436.jpeg')"><img src="photos/IMG_4436.jpeg" alt="生活照 3"><span class="photo-badge">03</span></div>
+        <div class="photo-item" onclick="openLightbox('photos/IMG_3024.jpeg')"><img src="photos/IMG_3024.jpeg" alt="生活照 4"><span class="photo-badge">04</span></div>
+        <div class="photo-item" onclick="openLightbox('photos/IMG_2733.jpeg')"><img src="photos/IMG_2733.jpeg" alt="生活照 5"><span class="photo-badge">05</span></div>
+        <div class="photo-item" onclick="openLightbox('photos/IMG_2691.jpeg')"><img src="photos/IMG_2691.jpeg" alt="生活照 6"><span class="photo-badge">06</span></div>
+      </div>
+      <div class="photo-hint">
+        <span class="small-emojis">👗 📸 🧢</span>
+        6 张生活照 · 点击按钮展开
+      </div>
+      <button class="photo-toggle" id="photoToggle" onclick="togglePhotos()">展开照片 📸</button>
+    </div>
+
+    <div class="intro-info">
+      <div class="info-grid">
+        <!-- ✏️ 可修改：下面 6 个信息格（左=小字说明，右=内容） -->
+        <div class="info-cell"><div class="k">身高 / 体重</div><div class="v">167cm / 90 斤</div></div>
+        <div class="info-cell"><div class="k">出生年月</div><div class="v">2001.06.06</div></div>
+        <div class="info-cell"><div class="k">毕业院校</div><div class="v">四川电影电视学院</div></div>
+        <div class="info-cell"><div class="k">专业</div><div class="v">播音与主持艺术</div></div>
+        <div class="info-cell"><div class="k">电话</div><div class="v contact">133-9552-6432</div></div>
+        <div class="info-cell"><div class="k">邮箱</div><div class="v contact">2050280897@qq.com</div></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ════════════════════════ 工作经历时间线 ════════════════════════ -->
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-header">
+        <div>
+          <div class="timeline-title">主播</div>
+          <div class="timeline-company">四川光影在线文化传媒有限公司</div>
+        </div>
+        <div class="timeline-date">2024.08 - 至今</div>
+      </div>
+      <div class="timeline-desc">负责达人账号直播，主营女装。平播场均在线 1000+，大场 2000+。参与骆驼、美津侬、坦博尔、幸棉等大场，单场 GMV <b>50W-200W+</b>。主动参与前期选品与搭配，提升全品转化率。</div>
+      <span class="timeline-highlight">🔥 单场 200W+</span>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-header">
+        <div>
+          <div class="timeline-title">主播</div>
+          <div class="timeline-company">成都火红金山电子商务有限公司</div>
+        </div>
+        <div class="timeline-date">2023.06 - 2024.02</div>
+      </div>
+      <div class="timeline-desc">负责家纺类官旗直播间，从自然流憋单转型付费平播。通过加强塑品话术，退货后 ROI 稳定 <b>3+</b>。基于产品特点调整话术，直播间留存率提升 <b>20%+</b>。</div>
+      <span class="timeline-highlight">📈 ROI 3+</span>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-header">
+        <div>
+          <div class="timeline-title">珠宝主播（实习）</div>
+          <div class="timeline-company">四川荧玥翡珠宝有限公司</div>
+        </div>
+        <div class="timeline-date">2022.08 - 2023.05</div>
+      </div>
+      <div class="timeline-desc">作为助播学习珠宝类目产品知识与直播基础架构，了解自然流赛道方法。作为主播独立开播，实现第一个单场 GMV <b>10W+</b>，点击成交率 <b>9.12%</b>，千次观看成交 <b>1460.12</b>。</div>
+      <span class="timeline-highlight">🚀 首个 10W+</span>
+    </div>
+  </div>
+
+  <div class="intro-statement">
+    <span class="tag"><span class="bounce-soft">💭</span> ABOUT ME ✦</span>
+    <p>我是一个 E 程度蛮高的 I 人，有点慢热，但因为社会化程度高，大家通常不太会察觉到我 I 的那一面。我最突出的优势，是<b>理解、沟通、表达和共情</b>的能力——我把这一整套流程统称为<b>洞察力</b>，也因此在朋友里时常担任心理委员的角色。</p>
+    <p>我的理解不止停留在字面，还会尽力去梳理当事人背后的心路历程，把一团乱麻的思路，提炼成精准的表达。我既愿意做心理安抚，也乐意给出我的看法，同时尽量避免冲突——因为我不想只做单纯的情绪输出，而是想用更有性价比的方式，把问题真正解决掉。</p>
+    <p>这些特质让我非常适合、也非常喜欢<b>镜前直播电商与团队协作</b>的工作：我擅长发现、安抚、调停与解决。</p>
+    <div class="strength-tags">
+      <span class="strength-tag"><span class="tag-icon">🎯</span>洞察力</span>
+      <span class="strength-tag"><span class="tag-icon">🤝</span>沟通调停</span>
+      <span class="strength-tag"><span class="tag-icon">📊</span>数据敏感</span>
+      <span class="strength-tag"><span class="tag-icon">⚡</span>临场反应</span>
+      <span class="strength-tag"><span class="tag-icon">🎙️</span>场景塑品</span>
+      <span class="strength-tag"><span class="tag-icon">🧩</span>前期选品</span>
+      <span class="strength-tag"><span class="tag-icon">🔄</span>数据复盘</span>
+    </div>
+  </div>
+</section>
+
+<div class="red-line"></div>
+
+<!-- ════════════════════════ 01 品牌理解 ════════════════════════
+  ✏️ 可修改：章节标题、副标题、三张卡片里的所有文字
+-->
+<section id="brand">
+  <div class="sec-head">
+    <span class="sec-no">01</span>
+    <div>
+      <div class="sec-title">💡 我对影视飓风的品牌理解</div>
+    </div>
+  </div>
+
+  <div class="grid3">
+    <!-- 卡片 1 -->
+    <div class="card">
+      <div class="tag"><span class="wiggle">📡</span> BRAND LOGIC</div>
+      <h3>🎙️ 直播风格：IP 向达播逻辑，而非传统官旗店播</h3>
+      <p>影视飓风的核心是内容 IP，用户买单的底层逻辑是<span class="hl">IP 认同</span>，电商板块偏周边属性。直播间不需要刻板话术和标准卖场氛围，用户期待的是更人格化、更自如的直播形式。</p>
+      <p>主播需要在专业能力之上，具备<span class="hl">亲和力和活人感</span>，通过个性化表达建立用户对主播本人的欣赏，这种粘性对 IP 向直播间的转化帮助很大。</p>
+      <p>这部分与我此前达播经验高度重合：作为达播直播间主播，用户通过个性化表达认识我、认可我，再转化成对直播间的信任与粘性——这对 IP 向直播间非常重要。</p>
+    </div>
+    <!-- 卡片 2 -->
+    <div class="card">
+      <div class="tag"><span class="bounce-soft">🛒</span> E-COMMERCE</div>
+      <h3>💰 电商模式：主播在其中的关键位置</h3>
+      <p>当前主营男装加课程，<span class="hl">付费流量占比不低</span>，与我之前女装为主、几乎纯自然流的流量结构不同。女装重款式种草，男装重功能效率，主播更多承担导购与决策的功能。</p>
+      <p>付费撬自然流可以通过内容调整实现：增加镜头与搭配场景变化，结合话术增加<span class="hl">面料、版型、功能性的特写</span>，扩充款式颜色，在基础款上找更多搭配可能。</p>
+      <p>这对主播<span class="hl">控场能力</span>要求更高：根据在线、停留和评论区互动，实时判断切特写或展示功能性的时机，同时保持亲和风格，避免过于专业化或严肃影响氛围。</p>
+    </div>
+    <!-- 卡片 3 -->
+    <div class="card">
+      <div class="tag"><span class="sparkle">📈</span> TREND</div>
+      <h3>🚀 未来趋势：基础款打底，用 SKU 撑起节奏</h3>
+      <p>当前店铺覆盖服饰内衣、家居家纺、3C 数码、鞋靴箱包，销售额主要来自服饰、课程、家纺。未来仍会围绕这些品类开发新款，以<span class="hl">基础款</span>保证受众广度和结算率；扩市场更稳妥的方式是先从更多配色入手。</p>
+      <p>购买用户约 75% 为男性，但按抖音粉丝体量，25% 女性用户也有 400 多万，<span class="hl">购买力可观</span>。家纺是受众广、更新快的品类，除被子外还有不同季节花色的四件套，适合加入科技感卖点形成影视飓风特色。（这俩恰好都是我擅长的品类）</p>
+      <p>SKU 增加后，整场直播节奏可玩性更高，素材更丰富。需区分<span class="hl">主推款和引流款</span>，让用户有更多选择但不因选择过多而犹豫，同时为直播内容和节奏带来变化。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════ 02 数据分析 ════════════════════════
+  ✏️ 可修改：六张数据卡的数字与说明、以及底部"连起来看"三条解读
+  ⚠ 数据来自本人简历、公开报道与蝉妈妈个人会员版，如需保真请勿改动数字本身
+-->
+<section id="data">
+  <div class="sec-head">
+    <span class="sec-no">02</span>
+    <div>
+      <div class="sec-title">📊 影视飓风的数据分析</div>
+
+    </div>
+  </div>
+
+  <!-- ═══════ 数据图表（来自直播后台截图） ═══════ -->
+  <div class="chart-wrap">
+    <div class="chart-row">
+      <div class="chart-box">
+        <img src="data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgNTYwIDMyMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiBzdHlsZT0id2lkdGg6MTAwJTtoZWlnaHQ6YXV0bzsiPgogIDxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InRyYW5zcGFyZW50Ii8+CiAgPHRleHQgeD0iMjAiIHk9IjI0IiBmaWxsPSIjZjJmNGY4IiBmb250LXNpemU9IjE0IiBmb250LXdlaWdodD0iNzAwIiBmb250LWZhbWlseT0iLWFwcGxlLXN5c3RlbSxCbGlua01hY1N5c3RlbUZvbnQsUGluZ0ZhbmcgU0Msc2Fucy1zZXJpZiI+6KeC55yL5Lq65qyhICZhbXA7IOW5s+Wdh+WcqOe6vzwvdGV4dD4KICA8dGV4dCB4PSIyMCIgeT0iNDIiIGZpbGw9IiM5YWEzYjIiIGZvbnQtc2l6ZT0iMTEiPui/kTjlnLrnm7Tmkq3otovlir/vvIjmn7HnirY96KeC55yL5Lq65qyh77yM57qi54K5PeW5s+Wdh+WcqOe6v++8iTwvdGV4dD4KICA8bGluZSB4MT0iNTAiIHkxPSIyNzAiIHgyPSI1MTAiIHkyPSIyNzAiIHN0cm9rZT0iIzI2MmMzYSIgc3Ryb2tlLXdpZHRoPSIxIi8+CiAgPHJlY3QgeD0iNjIuOSIgeT0iMTM0LjgiIHdpZHRoPSIzMS42IiBoZWlnaHQ9IjEzNS4yIiBmaWxsPSJyZ2JhKDIzMCwwLDE4LDAuMzUpIiByeD0iMyIvPjx0ZXh0IHg9Ijc4LjgiIHk9IjI4NC4wIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjOWFhM2IyIiBmb250LXNpemU9IjExIiBmb250LWZhbWlseT0iLWFwcGxlLXN5c3RlbSxCbGlua01hY1N5c3RlbUZvbnQsUGluZ0ZhbmcgU0Msc2Fucy1zZXJpZiI+MDktMjQK5pys5Zy6PC90ZXh0Pjx0ZXh0IHg9Ijc4LjgiIHk9IjEyOC44IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjZTYwMDEyIiBmb250LXNpemU9IjEwIiBmb250LXdlaWdodD0iNjAwIj4xMTZrPC90ZXh0PjxyZWN0IHg9IjEyMC40IiB5PSI4OS42IiB3aWR0aD0iMzEuNiIgaGVpZ2h0PSIxODAuNCIgZmlsbD0icmdiYSgyMzAsMCwxOCwwLjM1KSIgcng9IjMiLz48dGV4dCB4PSIxMzYuMiIgeT0iMjg0LjAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM5YWEzYjIiIGZvbnQtc2l6ZT0iMTEiIGZvbnQtZmFtaWx5PSItYXBwbGUtc3lzdGVtLEJsaW5rTWFjU3lzdGVtRm9udCxQaW5nRmFuZyBTQyxzYW5zLXNlcmlmIj4wOS0yMjwvdGV4dD48dGV4dCB4PSIxMzYuMiIgeT0iODMuNiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI2U2MDAxMiIgZm9udC1zaXplPSIxMCIgZm9udC13ZWlnaHQ9IjYwMCI+MTU1azwvdGV4dD48cmVjdCB4PSIxNzcuOSIgeT0iNzguNyIgd2lkdGg9IjMxLjYiIGhlaWdodD0iMTkxLjMiIGZpbGw9InJnYmEoMjMwLDAsMTgsMC4zNSkiIHJ4PSIzIi8+PHRleHQgeD0iMTkzLjgiIHk9IjI4NC4wIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjOWFhM2IyIiBmb250LXNpemU9IjExIiBmb250LWZhbWlseT0iLWFwcGxlLXN5c3RlbSxCbGlua01hY1N5c3RlbUZvbnQsUGluZ0ZhbmcgU0Msc2Fucy1zZXJpZiI+MDktMjE8L3RleHQ+PHRleHQgeD0iMTkzLjgiIHk9IjcyLjciIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiNlNjAwMTIiIGZvbnQtc2l6ZT0iMTAiIGZvbnQtd2VpZ2h0PSI2MDAiPjE2NGs8L3RleHQ+PHJlY3QgeD0iMjM1LjQiIHk9IjExMi4wIiB3aWR0aD0iMzEuNiIgaGVpZ2h0PSIxNTguMCIgZmlsbD0icmdiYSgyMzAsMCwxOCwwLjM1KSIgcng9IjMiLz48dGV4dCB4PSIyNTEuMiIgeT0iMjg0LjAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM5YWEzYjIiIGZvbnQtc2l6ZT0iMTEiIGZvbnQtZmFtaWx5PSItYXBwbGUtc3lzdGVtLEJsaW5rTWFjU3lzdGVtRm9udCxQaW5nRmFuZyBTQyxzYW5zLXNlcmlmIj4wOS0xNjwvdGV4dD48dGV4dCB4PSIyNTEuMiIgeT0iMTA2LjAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiNlNjAwMTIiIGZvbnQtc2l6ZT0iMTAiIGZvbnQtd2VpZ2h0PSI2MDAiPjEzNms8L3RleHQ+PHJlY3QgeD0iMjkyLjkiIHk9IjEyNi45IiB3aWR0aD0iMzEuNiIgaGVpZ2h0PSIxNDMuMSIgZmlsbD0icmdiYSgyMzAsMCwxOCwwLjM1KSIgcng9IjMiLz48dGV4dCB4PSIzMDguOCIgeT0iMjg0LjAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM5YWEzYjIiIGZvbnQtc2l6ZT0iMTEiIGZvbnQtZmFtaWx5PSItYXBwbGUtc3lzdGVtLEJsaW5rTWFjU3lzdGVtRm9udCxQaW5nRmFuZyBTQyxzYW5zLXNlcmlmIj4wOS0xMTwvdGV4dD48dGV4dCB4PSIzMDguOCIgeT0iMTIwLjkiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiNlNjAwMTIiIGZvbnQtc2l6ZT0iMTAiIGZvbnQtd2VpZ2h0PSI2MDAiPjEyM2s8L3RleHQ+PHJlY3QgeD0iMzUwLjQiIHk9IjE3MS43IiB3aWR0aD0iMzEuNiIgaGVpZ2h0PSI5OC4zIiBmaWxsPSJyZ2JhKDIzMCwwLDE4LDAuMzUpIiByeD0iMyIvPjx0ZXh0IHg9IjM2Ni4yIiB5PSIyODQuMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzlhYTNiMiIgZm9udC1zaXplPSIxMSIgZm9udC1mYW1pbHk9Ii1hcHBsZS1zeXN0ZW0sQmxpbmtNYWNTeXN0ZW1Gb250LFBpbmdGYW5nIFNDLHNhbnMtc2VyaWYiPjA5LTA4PC90ZXh0Pjx0ZXh0IHg9IjM2Ni4yIiB5PSIxNjUuNyIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI2U2MDAxMiIgZm9udC1zaXplPSIxMCIgZm9udC13ZWlnaHQ9IjYwMCI+ODRrPC90ZXh0PjxyZWN0IHg9IjQwNy45IiB5PSIxNTMuMyIgd2lkdGg9IjMxLjYiIGhlaWdodD0iMTE2LjciIGZpbGw9InJnYmEoMjMwLDAsMTgsMC4zNSkiIHJ4PSIzIi8+PHRleHQgeD0iNDIzLjgiIHk9IjI4NC4wIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjOWFhM2IyIiBmb250LXNpemU9IjExIiBmb250LWZhbWlseT0iLWFwcGxlLXN5c3RlbSxCbGlua01hY1N5c3RlbUZvbnQsUGluZ0ZhbmcgU0Msc2Fucy1zZXJpZiI+MDktMDc8L3RleHQ+PHRleHQgeD0iNDIzLjgiIHk9IjE0Ny4zIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjZTYwMDEyIiBmb250LXNpemU9IjEwIiBmb250LXdlaWdodD0iNjAwIj4xMDBrPC90ZXh0PjxyZWN0IHg9IjQ2NS40IiB5PSIxNDUuMyIgd2lkdGg9IjMxLjYiIGhlaWdodD0iMTI0LjciIGZpbGw9InJnYmEoMjMwLDAsMTgsMC4zNSkiIHJ4PSIzIi8+PHRleHQgeD0iNDgxLjIiIHk9IjI4NC4wIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjOWFhM2IyIiBmb250LXNpemU9IjExIiBmb250LWZhbWlseT0iLWFwcGxlLXN5c3RlbSxCbGlua01hY1N5c3RlbUZvbnQsUGluZ0ZhbmcgU0Msc2Fucy1zZXJpZiI+MDktMDI8L3RleHQ+PHRleHQgeD0iNDgxLjIiIHk9IjEzOS4zIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjZTYwMDEyIiBmb250LXNpemU9IjEwIiBmb250LXdlaWdodD0iNjAwIj4xMDdrPC90ZXh0PgogIDxwb2x5bGluZSBwb2ludHM9Ijc4LjgsMTUxLjYgMTM2LjIsMTEyLjIgMTkzLjgsODYuNyAyNTEuMiwxMzEuNSAzMDguOCwxNDAuMSAzNjYuMiwxNzkuMCA0MjMuOCwxNTguNyA0ODEuMiwxNTMuNiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZTYwMDEyIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPgogIDxjaXJjbGUgY3g9Ijc4LjgiIGN5PSIxNTEuNiIgcj0iMy41IiBmaWxsPSIjZTYwMDEyIi8+PGNpcmNsZSBjeD0iMTM2LjIiIGN5PSIxMTIuMiIgcj0iMy41IiBmaWxsPSIjZTYwMDEyIi8+PGNpcmNsZSBjeD0iMTkzLjgiIGN5PSI4Ni43IiByPSIzLjUiIGZpbGw9IiNlNjAwMTIiLz48Y2lyY2xlIGN4PSIyNTEuMiIgY3k9IjEzMS41IiByPSIzLjUiIGZpbGw9IiNlNjAwMTIiLz48Y2lyY2xlIGN4PSIzMDguOCIgY3k9IjE0MC4xIiByPSIzLjUiIGZpbGw9IiNlNjAwMTIiLz48Y2lyY2xlIGN4PSIzNjYuMiIgY3k9IjE3OS4wIiByPSIzLjUiIGZpbGw9IiNlNjAwMTIiLz48Y2lyY2xlIGN4PSI0MjMuOCIgY3k9IjE1OC43IiByPSIzLjUiIGZpbGw9IiNlNjAwMTIiLz48Y2lyY2xlIGN4PSI0ODEuMiIgY3k9IjE1My42IiByPSIzLjUiIGZpbGw9IiNlNjAwMTIiLz4KICA8dGV4dCB4PSI4Ni44IiB5PSIxNDMuNiIgZmlsbD0iI2YyZjRmOCIgZm9udC1zaXplPSIxMCIgZm9udC13ZWlnaHQ9IjYwMCI+NzQzPC90ZXh0Pjx0ZXh0IHg9IjE0NC4yIiB5PSIxMDQuMiIgZmlsbD0iI2YyZjRmOCIgZm9udC1zaXplPSIxMCIgZm9udC13ZWlnaHQ9IjYwMCI+OTkwPC90ZXh0Pjx0ZXh0IHg9IjIwMS44IiB5PSI3OC43IiBmaWxsPSIjZjJmNGY4IiBmb250LXNpemU9IjEwIiBmb250LXdlaWdodD0iNjAwIj4xMTUwPC90ZXh0Pjx0ZXh0IHg9IjI1OS4yIiB5PSIxMjMuNSIgZmlsbD0iI2YyZjRmOCIgZm9udC1zaXplPSIxMCIgZm9udC13ZWlnaHQ9IjYwMCI+ODY5PC90ZXh0Pjx0ZXh0IHg9IjMxNi44IiB5PSIxMzIuMSIgZmlsbD0iI2YyZjRmOCIgZm9udC1zaXplPSIxMCIgZm9udC13ZWlnaHQ9IjYwMCI+ODE1PC90ZXh0Pjx0ZXh0IHg9IjM3NC4yIiB5PSIxNzEuMCIgZmlsbD0iI2YyZjRmOCIgZm9udC1zaXplPSIxMCIgZm9udC13ZWlnaHQ9IjYwMCI+NTcxPC90ZXh0Pjx0ZXh0IHg9IjQzMS44IiB5PSIxNTAuNyIgZmlsbD0iI2YyZjRmOCIgZm9udC1zaXplPSIxMCIgZm9udC13ZWlnaHQ9IjYwMCI+Njk4PC90ZXh0Pjx0ZXh0IHg9IjQ4OS4yIiB5PSIxNDUuNiIgZmlsbD0iI2YyZjRmOCIgZm9udC1zaXplPSIxMCIgZm9udC13ZWlnaHQ9IjYwMCI+NzMwPC90ZXh0Pgo8L3N2Zz4=" alt="观看人次与平均在线趋势" style="width:100%;display:block;">
+        <div class="chart-caption">观看人次（红柱）&amp; 平均在线（红点连线）——近8场波动明显，09-21 场在线峰值 1150</div>
+      </div>
+      <div class="chart-box">
+        <img src="data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgNTYwIDMyMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiBzdHlsZT0id2lkdGg6MTAwJTtoZWlnaHQ6YXV0bzsiPgogIDxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InRyYW5zcGFyZW50Ii8+CiAgPHRleHQgeD0iMjAiIHk9IjI0IiBmaWxsPSIjZjJmNGY4IiBmb250LXNpemU9IjE0IiBmb250LXdlaWdodD0iNzAwIiBmb250LWZhbWlseT0iLWFwcGxlLXN5c3RlbSxCbGlua01hY1N5c3RlbUZvbnQsUGluZ0ZhbmcgU0Msc2Fucy1zZXJpZiI+5LqS5Yqo546HICZhbXA7IOS7mOi0uea1gemHj+WNoOavlDwvdGV4dD4KICA8dGV4dCB4PSIyMCIgeT0iNDIiIGZpbGw9IiM5YWEzYjIiIGZvbnQtc2l6ZT0iMTEiPui/kTjlnLrnm7Tmkq3otovlir/vvIjmn7HnirY95LqS5Yqo546H77yM55m954K5PeS7mOi0uea1gemHj+WNoOavlO+8iTwvdGV4dD4KICA8bGluZSB4MT0iNTAiIHkxPSIyNzAiIHgyPSI1MTAiIHkyPSIyNzAiIHN0cm9rZT0iIzI2MmMzYSIgc3Ryb2tlLXdpZHRoPSIxIi8+CiAgPHJlY3QgeD0iNjIuOSIgeT0iMTk3LjUiIHdpZHRoPSIzMS42IiBoZWlnaHQ9IjcyLjUiIGZpbGw9InJnYmEoMjMwLDAsMTgsMC40NSkiIHJ4PSIzIi8+PHRleHQgeD0iNzguOCIgeT0iMjg0LjAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM5YWEzYjIiIGZvbnQtc2l6ZT0iMTEiPjA5LTI0CuacrOWcujwvdGV4dD48dGV4dCB4PSI3OC44IiB5PSIxOTEuNSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI2YyZjRmOCIgZm9udC1zaXplPSIxMCIgZm9udC13ZWlnaHQ9IjYwMCI+Mi4xNSU8L3RleHQ+PHJlY3QgeD0iMTIwLjQiIHk9IjIwMy45IiB3aWR0aD0iMzEuNiIgaGVpZ2h0PSI2Ni4xIiBmaWxsPSJyZ2JhKDIzMCwwLDE4LDAuNDUpIiByeD0iMyIvPjx0ZXh0IHg9IjEzNi4yIiB5PSIyODQuMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzlhYTNiMiIgZm9udC1zaXplPSIxMSI+MDktMjI8L3RleHQ+PHRleHQgeD0iMTM2LjIiIHk9IjE5Ny45IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjZjJmNGY4IiBmb250LXNpemU9IjEwIiBmb250LXdlaWdodD0iNjAwIj4xLjk2JTwvdGV4dD48cmVjdCB4PSIxNzcuOSIgeT0iMTAwLjgiIHdpZHRoPSIzMS42IiBoZWlnaHQ9IjE2OS4yIiBmaWxsPSIjZTYwMDEyIiByeD0iMyIvPjx0ZXh0IHg9IjE5My44IiB5PSIyODQuMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzlhYTNiMiIgZm9udC1zaXplPSIxMSI+MDktMjE8L3RleHQ+PHRleHQgeD0iMTkzLjgiIHk9Ijk0LjgiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiNmMmY0ZjgiIGZvbnQtc2l6ZT0iMTAiIGZvbnQtd2VpZ2h0PSI2MDAiPjUuMDIlPC90ZXh0PjxyZWN0IHg9IjIzNS40IiB5PSIxNTEuMCIgd2lkdGg9IjMxLjYiIGhlaWdodD0iMTE5LjAiIGZpbGw9IiNlNjAwMTIiIHJ4PSIzIi8+PHRleHQgeD0iMjUxLjIiIHk9IjI4NC4wIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjOWFhM2IyIiBmb250LXNpemU9IjExIj4wOS0xNjwvdGV4dD48dGV4dCB4PSIyNTEuMiIgeT0iMTQ1LjAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiNmMmY0ZjgiIGZvbnQtc2l6ZT0iMTAiIGZvbnQtd2VpZ2h0PSI2MDAiPjMuNTMlPC90ZXh0PjxyZWN0IHg9IjI5Mi45IiB5PSIyNTcuMiIgd2lkdGg9IjMxLjYiIGhlaWdodD0iMTIuOCIgZmlsbD0icmdiYSgyMzAsMCwxOCwwLjQ1KSIgcng9IjMiLz48dGV4dCB4PSIzMDguOCIgeT0iMjg0LjAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM5YWEzYjIiIGZvbnQtc2l6ZT0iMTEiPjA5LTExPC90ZXh0Pjx0ZXh0IHg9IjMwOC44IiB5PSIyNTEuMiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI2YyZjRmOCIgZm9udC1zaXplPSIxMCIgZm9udC13ZWlnaHQ9IjYwMCI+MC4zOCU8L3RleHQ+PHJlY3QgeD0iMzUwLjQiIHk9IjE2Ni44IiB3aWR0aD0iMzEuNiIgaGVpZ2h0PSIxMDMuMiIgZmlsbD0iI2U2MDAxMiIgcng9IjMiLz48dGV4dCB4PSIzNjYuMiIgeT0iMjg0LjAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM5YWEzYjIiIGZvbnQtc2l6ZT0iMTEiPjA5LTA4PC90ZXh0Pjx0ZXh0IHg9IjM2Ni4yIiB5PSIxNjAuOCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI2YyZjRmOCIgZm9udC1zaXplPSIxMCIgZm9udC13ZWlnaHQ9IjYwMCI+My4wNiU8L3RleHQ+PHJlY3QgeD0iNDA3LjkiIHk9IjE2Ni44IiB3aWR0aD0iMzEuNiIgaGVpZ2h0PSIxMDMuMiIgZmlsbD0iI2U2MDAxMiIgcng9IjMiLz48dGV4dCB4PSI0MjMuOCIgeT0iMjg0LjAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM5YWEzYjIiIGZvbnQtc2l6ZT0iMTEiPjA5LTA3PC90ZXh0Pjx0ZXh0IHg9IjQyMy44IiB5PSIxNjAuOCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI2YyZjRmOCIgZm9udC1zaXplPSIxMCIgZm9udC13ZWlnaHQ9IjYwMCI+My4wNiU8L3RleHQ+PHJlY3QgeD0iNDY1LjQiIHk9IjE0OC42IiB3aWR0aD0iMzEuNiIgaGVpZ2h0PSIxMjEuNCIgZmlsbD0iI2U2MDAxMiIgcng9IjMiLz48dGV4dCB4PSI0ODEuMiIgeT0iMjg0LjAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM5YWEzYjIiIGZvbnQtc2l6ZT0iMTEiPjA5LTAyPC90ZXh0Pjx0ZXh0IHg9IjQ4MS4yIiB5PSIxNDIuNiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI2YyZjRmOCIgZm9udC1zaXplPSIxMCIgZm9udC13ZWlnaHQ9IjYwMCI+My42JTwvdGV4dD4KICA8cG9seWxpbmUgcG9pbnRzPSI3OC44LDEzNi42IDEzNi4yLDc4LjcgMTkzLjgsMjI1LjQgMjUxLjIsODcuMSAzMDguOCwxODkuOCAzNjYuMiwxNTMuNyA0MjMuOCwxODQuNCA0ODEuMiwxODEuOSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZjJmNGY4IiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLWRhc2hhcnJheT0iNCwzIi8+CiAgPGNpcmNsZSBjeD0iNzguOCIgY3k9IjEzNi42IiByPSIzLjUiIGZpbGw9IiNmMmY0ZjgiLz48Y2lyY2xlIGN4PSIxMzYuMiIgY3k9Ijc4LjciIHI9IjMuNSIgZmlsbD0iI2YyZjRmOCIvPjxjaXJjbGUgY3g9IjE5My44IiBjeT0iMjI1LjQiIHI9IjMuNSIgZmlsbD0iI2YyZjRmOCIvPjxjaXJjbGUgY3g9IjI1MS4yIiBjeT0iODcuMSIgcj0iMy41IiBmaWxsPSIjZjJmNGY4Ii8+PGNpcmNsZSBjeD0iMzA4LjgiIGN5PSIxODkuOCIgcj0iMy41IiBmaWxsPSIjZjJmNGY4Ii8+PGNpcmNsZSBjeD0iMzY2LjIiIGN5PSIxNTMuNyIgcj0iMy41IiBmaWxsPSIjZjJmNGY4Ii8+PGNpcmNsZSBjeD0iNDIzLjgiIGN5PSIxODQuNCIgcj0iMy41IiBmaWxsPSIjZjJmNGY4Ii8+PGNpcmNsZSBjeD0iNDgxLjIiIGN5PSIxODEuOSIgcj0iMy41IiBmaWxsPSIjZjJmNGY4Ii8+CiAgPHRleHQgeD0iODYuOCIgeT0iMTI4LjYiIGZpbGw9IiNmMmY0ZjgiIGZvbnQtc2l6ZT0iMTAiPjI3LjA4JTwvdGV4dD48dGV4dCB4PSIxNDQuMiIgeT0iNzAuNyIgZmlsbD0iI2YyZjRmOCIgZm9udC1zaXplPSIxMCI+MzguODMlPC90ZXh0Pjx0ZXh0IHg9IjIwMS44IiB5PSIyMTcuNCIgZmlsbD0iI2YyZjRmOCIgZm9udC1zaXplPSIxMCI+OS4wNiU8L3RleHQ+PHRleHQgeD0iMjU5LjIiIHk9Ijc5LjEiIGZpbGw9IiNmMmY0ZjgiIGZvbnQtc2l6ZT0iMTAiPjM3LjEzJTwvdGV4dD48dGV4dCB4PSIzMTYuOCIgeT0iMTgxLjgiIGZpbGw9IiNmMmY0ZjgiIGZvbnQtc2l6ZT0iMTAiPjE2LjI4JTwvdGV4dD48dGV4dCB4PSIzNzQuMiIgeT0iMTQ1LjciIGZpbGw9IiNmMmY0ZjgiIGZvbnQtc2plPSIxMCI+MjMuNjElPC90ZXh0Pjx0ZXh0IHg9IjQzMS44IiB5PSIxNzYuNCIgZmlsbD0iI2YyZjRmOCIgZm9udC1zaXplPSIxMCI+MTcuMzglPC90ZXh0Pjx0ZXh0IHg9IjQ4OS4yIiB5PSIxNzMuOSIgZmlsbD0iI2YyZjRmOCIgZm9udC1zaXplPSIxMCI+MTcuODklPC90ZXh0Pgo8L3N2Zz4=" alt="互动率与付费流量占比趋势" style="width:100%;display:block;">
+        <div class="chart-caption">互动率（红柱，≥3% 高亮）&amp; 付费流量占比（白点虚线）——09-21 互动率 5.02% 为峰值，付费流量波动大</div>
+      </div>
+    </div>
+    <p style="color:#9aa3b2;font-size:12px;margin-top:12px;">数据来源：用户提供的直播后台截图（2026-10 近 8 场）。柱状=绝对数值，折线/点=叠加指标。</p>
+  </div>
+
+  <!-- ✏️ 可修改：三条"连起来看"的解读 -->
+  <div class="takeaway">
+    <div class="t-title"><span class="wiggle">💡</span> ✦ 把这些数字连起来看</div>
+    <ul>
+      <li><b>场观好但成交、互动波动大：</b>这是货盘、主推款选择、主播承接与转化能力的共同结果。主推款应结合当场点击率实时调整——把用户更感兴趣的作为主推，数据稍低的作为次主推用来调整节奏。场景上发挥影视飓风的专业化优势，多展示近距离功能性特写，能有效提升停留。</li>
+      <li><b>弹幕热词显示粉丝占比高：</b>对品牌粘性和氛围是好事，但更考验主播的承接能力。要同时做好互动和讲品——不讲品没成交，不互动掉留存，需要在 IP 互动状态与产品讲解状态之间不停切换，节奏要求很高。</li>
+      <li><b>整场节奏和单品话术要更精准：</b>根据后台数据实时调整主推与次主推的时长分配，把更多时间留给转化率更高的款。同时预留弹幕互动时段、福利引流款和话题钩子，保证节奏丰富不单调——这对主播的控场与预判能力要求很高。</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ════════════════════════ 03 试播视频 ════════════════════════
+  ✏️ 可修改：视频描述文字、网盘链接、提取码
+  ⚠️ 如需更换视频链接，直接替换下方 href 的值即可
+-->
+<section id="video">
+  <div class="sec-head">
+    <span class="sec-no">03</span>
+    <div>
+      <div class="sec-title">🎬 试播视频</div>
+    </div>
+  </div>
+
+  <div class="video-cta">
+    <div class="v-icon">▶️</div>
+    <div class="v-title">影视飓风产品试播</div>
+    <div class="v-desc">
+      这是我在准备面试期间录制的<b>影视飓风产品试播视频</b>，
+      展示了我对品牌调性的理解、直播节奏把控以及临场反应能力。
+      <br>点击下方按钮前往夸克网盘查看完整视频。
+    </div>
+    <a class="video-btn" href="https://pan.quark.cn/s/68dbcd389993" target="_blank" rel="noopener noreferrer">
+      <svg viewBox="0 0 24 24"><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96z"/></svg>
+      前往夸克网盘查看视频
+    </a>
+    <div class="video-meta">
+      <span>☁️ 夸克网盘 · 在线播放</span>
+      <span>📦 陈梦珂影视飓风产品试播.mp4</span>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- ════════════════════════ 页脚 ════════════════════════
+  ✏️ 可修改：页脚口号、署名、联系方式、底部小字
+-->
+<footer>
+    <div class="slogan"><span class="float-star">🚀</span> 无限<em>进步</em> <span class="sparkle">✦</span></div>
+  <div class="meta">陈梦珂 · 求职 影视飓风 电商主播</div>
+  <div class="contact-line">
+    <span>133-9552-6432</span>
+    <span>2050280897@qq.com</span>
+  </div>
+  <div class="note">本页数据均来自本人简历与公开报道（以及我的蝉妈妈个人会员版）；期待与「无限进步」的团队并肩。</div>
+</footer>
+
+<!-- ═══════ 照片点击放大 lightbox ═══════ -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+  <button class="lightbox-close" onclick="closeLightboxBtn(event)" title="关闭">✕</button>
+  <button class="lb-nav-btn prev" id="lbPrev" onclick="lbPrevPhoto(event)" title="上一张">←</button>
+  <img class="lightbox-img" id="lightboxImg" src="" alt="放大照片">
+  <button class="lb-nav-btn next" id="lbNext" onclick="lbNextPhoto(event)" title="下一张">→</button>
+  <div class="lightbox-caption" id="lightboxCaption"><span id="lbCounter">1 / 6</span> · 点击空白处、✕ 或按 ESC 关闭</div>
+</div>
+
+<script>
+  const photos = [
+    'photos/IMG_4439.png',
+    'photos/IMG_4435.jpeg',
+    'photos/IMG_4436.jpeg',
+    'photos/IMG_3024.jpeg',
+    'photos/IMG_2733.jpeg',
+    'photos/IMG_2691.jpeg'
+  ];
+  let lbIndex = 0;
+
+  function togglePhotos() {
+    const wall = document.getElementById('photoWall');
+    const btn = document.getElementById('photoToggle');
+    wall.classList.toggle('collapsed');
+    btn.textContent = wall.classList.contains('collapsed') ? '展开照片 📸' : '收起照片 📸';
+  }
+
+  function showLightbox(idx) {
+    if (idx < 0) idx = photos.length - 1;
+    if (idx >= photos.length) idx = 0;
+    lbIndex = idx;
+    const lb = document.getElementById('lightbox');
+    const img = document.getElementById('lightboxImg');
+    const counter = document.getElementById('lbCounter');
+    img.src = photos[idx];
+    counter.textContent = (idx + 1) + ' / ' + photos.length;
+    lb.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function openLightbox(src) {
+    const idx = photos.indexOf(src);
+    showLightbox(idx >= 0 ? idx : 0);
+  }
+
+  function closeLightbox(e) {
+    if (e.target.id === 'lightbox') {
+      const lb = document.getElementById('lightbox');
+      lb.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+  }
+
+  function closeLightboxBtn(e) {
+    e.stopPropagation();
+    const lb = document.getElementById('lightbox');
+    lb.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  function lbPrevPhoto(e) {
+    e.stopPropagation();
+    showLightbox(lbIndex - 1);
+  }
+
+  function lbNextPhoto(e) {
+    e.stopPropagation();
+    showLightbox(lbIndex + 1);
+  }
+
+  document.addEventListener('keydown', function(e) {
+    const lb = document.getElementById('lightbox');
+    if (!lb.classList.contains('active')) return;
+    if (e.key === 'Escape') {
+      lb.classList.remove('active');
+      document.body.style.overflow = '';
+    } else if (e.key === 'ArrowLeft') {
+      showLightbox(lbIndex - 1);
+    } else if (e.key === 'ArrowRight') {
+      showLightbox(lbIndex + 1);
+    }
+  });
+</script>
+
+</body>
+</html>
